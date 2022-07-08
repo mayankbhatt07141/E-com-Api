@@ -17,7 +17,7 @@ class UsersController < BaseController
    
     if user.valid?
       sign_in(user)
-      render json: { user: user, auth_token: user.authentication_token }
+      render json: { user: user, tokens: user.authentication_token }
     else
       render json: { error: user.errors.full_messages.to_sentence }, status: 422
     end
@@ -54,7 +54,7 @@ class UsersController < BaseController
     end
 
     def user_params
-      params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
+      params.require(:user).permit(:email, :first_name, :last_name, :password,:role)
     end
 
 end

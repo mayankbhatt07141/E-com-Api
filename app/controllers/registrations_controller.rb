@@ -10,7 +10,19 @@ class RegistrationsController < Devise::RegistrationsController
         render json: { error: "Couldn't update the password! Please try again." }, status: :unprocessable_entity
       end
   end
-  
+  def reset_password
+      resource = User.find_by_email(params[:user][:email])
+
+      if resource && params[:user][:role]==resource.role
+        resource.password=params[:user][:password]
+        puts params[:user][:password]
+        resource.save
+        render json: { notice: 'Password has been successfully changed' }, status: :ok
+      else
+        
+        render json: { error: "Couldn't reset the password! Please try again." }, status: :unprocessable_entity
+      end
+  end
   private
   
   def sign_up_params
@@ -23,6 +35,9 @@ class RegistrationsController < Devise::RegistrationsController
 
   def password_update_params
     resource_params.permit(:password, :password_confirmation, :current_password)
+  end
+  def password_reset_params
+    resource_params.permit(:email,:password)
   end
 
   def resource_params
