@@ -6,7 +6,7 @@ class SessionsController <BaseController
     # puts params[:user][:email]
     user = User.find_for_database_authentication(email: params[:user][:email])
     defined_user_role = user.role
-    puts params[:user][:role]!=defined_user_role
+    puts params[:user][:role]==defined_user_role
     puts invalid_password?(user) 
     if params[:user][:role]!=defined_user_role  || invalid_password?(user) 
       respond_with_error "Incorrect email or password", 401

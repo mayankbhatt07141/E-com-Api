@@ -11,4 +11,5 @@ Rails.application.routes.draw do
     put "password/reset", to: "registrations#reset_password"
   end
   resources :users, only: [:show, :create, :update, :destroy], constraints: { id: /.*/ }
+  resources :products, only: [:show, :create, :index]
 end
