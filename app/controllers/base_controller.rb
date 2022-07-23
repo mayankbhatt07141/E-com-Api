@@ -1,6 +1,6 @@
 class BaseController < ApplicationController
-    before_action :authenticate_user_using_x_auth_token
-    before_action :authenticate_user!
+    before_action :authenticate_user_using_x_auth_token, except: [:index,:show,:show_email]
+    before_action :authenticate_user!,except: [:index,:show,:show_email]
 
     respond_to :json
 

@@ -15,7 +15,7 @@ class SessionsController <BaseController
       # render json: { auth_token: user.authentication_token, user: user, is_admin: user.super_admin? },
               # location: root_path, status: :created
       render json: { tokens: user.authentication_token, user: user },
-              location: root_path, status: :created
+            status: :created
     end
   end
 

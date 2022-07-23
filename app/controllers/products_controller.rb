@@ -8,14 +8,20 @@ class ProductsController < ApplicationController
   end
 
   def create
-    product=AddProduct.create product_params
-    if product.valid?
-      render json: { message: "product created sucessfully"}
+    @product=AddProduct.create product_params
+    if @product.valid?
+      render json: { message: "product created sucessfully", id: @product.id}
     else
       render json: { error: "error occoured while creating the product" }, status: 422
     end
   end
-
+ 
+  def update
+    @product=AddProduct.find_by(params[:id])
+    if @product
+      @product.update(params)
+    end
+  end
 ## get products by id
   def show
     products=AddProduct.all

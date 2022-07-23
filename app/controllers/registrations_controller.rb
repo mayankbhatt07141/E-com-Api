@@ -12,14 +12,12 @@ class RegistrationsController < Devise::RegistrationsController
   end
   def reset_password
       resource = User.find_by_email(params[:user][:email])
-
+      puts params[:user][:role]==resource.role
       if resource && params[:user][:role]==resource.role
         resource.password=params[:user][:password]
-        puts params[:user][:password]
         resource.save
         render json: { notice: 'Password has been successfully changed' }, status: :ok
       else
-        
         render json: { error: "Couldn't reset the password! Please try again." }, status: :unprocessable_entity
       end
   end
