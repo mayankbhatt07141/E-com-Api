@@ -1,7 +1,7 @@
 class CreateAddProducts < ActiveRecord::Migration[7.0]
   def change
     create_table :add_products do |t|
-      t.string :title
+      t.string :name
       t.string :product_description
       t.string :category
       t.string :brand_name
@@ -21,6 +21,7 @@ class CreateAddProducts < ActiveRecord::Migration[7.0]
       t.string :country
       t.string :product_id
       t.string :hs_code
+      t.string :cover_image_url
       t.timestamps
     end
   end

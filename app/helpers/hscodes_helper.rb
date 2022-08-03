@@ -1,0 +1,2 @@
+module HscodesHelper
+end

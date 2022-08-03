@@ -10,11 +10,14 @@ Rails.application.routes.draw do
     put "password/update", to: "registrations#update_password"
     put "password/reset", to: "registrations#reset_password"
   end
+  get "products/latest", to: "products#latest"
   get "users/show_email", to: "users#show_email"
   resources :users
-  resources :products, only: [:show, :create, :index, :update]
+  resources :products
   resources :categories, only: [:index]
+  resources :countries, only: [:index]
+  resources :hscodes, only: [:index]
   resources :sizes, only: [:index]
-  
+  resources :shopping_carts
   
 end 
