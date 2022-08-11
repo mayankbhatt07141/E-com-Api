@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
   end
 
   def create     
+    puts params;
     @product=AddProduct.create!(product_params)
     @product.update({cover_image_url: url_for(@product.image)})
     if @product.valid?
@@ -20,9 +21,13 @@ class ProductsController < ApplicationController
   def update
     puts params
     @product=AddProduct.find_by(params[:id])
-    @product.image.purge;
+    if params[:image]
+      @product.image.purge;
+    end
     @product.update(product_params)
-    @product.update({cover_image_url: url_for(@product.image)})
+    if params[:image]
+       @product.update({cover_image_url: url_for(@product.image)})
+    end
     if @product.save
       puts "bat done"
       render json: {resp:"updated"}
